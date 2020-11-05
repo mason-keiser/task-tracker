@@ -1,6 +1,8 @@
 import React from 'react';
+import Header from './header';
 import Home from './home';
 import Login from './login';
+import Mainpage from './mainpage';
 import SignUp from './signup';
 
 export default class App extends React.Component {
@@ -97,15 +99,22 @@ export default class App extends React.Component {
   }
 
   render() {
+    const header= (this.state.view.name === 'main')
+      ? <Header user={this.state.user} setView={this.setView}/>
+      : null
+
     const view = (this.state.view.name === 'home')
       ? <Home setView = {this.setView}/>
       : (this.state.view.name === 'login')
         ? <Login setView = {this.setView} login={this.login}/>
         : (this.state.view.name ==='signup')
           ? <SignUp setView = {this.setView} signUp={this.signUp}/>
-          : null
+          : (this.state.view.name === 'main')
+            ? <Mainpage setView={this.setView} user={this.state.user}/>
+            : null
     return (
     <div>
+      {header}
       {view}
     </div>
     )

@@ -69,6 +69,25 @@ body {
     cursor: pointer;
 }
 
+.navcont {
+    background-color: #e1e1e1;
+}
+
+.navbar {
+    cursor: pointer;
+}
+
+.formContainer {
+    width: 90%;
+    border: 1px solid black;
+    border-radius: 5%;
+    text-align: center;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+
+
 @media screen and (min-width: 700px) {
     .homeButtons > div {
         width: 8%;
