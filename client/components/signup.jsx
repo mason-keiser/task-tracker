@@ -17,10 +17,10 @@ export default class SignUp extends React.Component {
   handleSubmit(callback) {
     event.preventDefault();
     const obj = {
-      user_first: this.state.user_first,
-      user_last: this.state.user_last,
-      user_email: this.state.user_email,
-      user_password: this.state.user_password
+      firstname: this.state.user_first,
+      lastname: this.state.user_last,
+      email: this.state.user_email,
+      password: this.state.user_password
     };
     callback(obj)
   }

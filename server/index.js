@@ -30,24 +30,26 @@ app.get('/api/users', (req, res, next) => {
 });
 
 //  SIGN UP API POST REQUEST THAT ADDS USER INFO TO DB
-// GO THROUGH DB TO ADJUST SIGNUP POSTGRESQL
 
-app.post('/api/signUp', (req, res, next) => {
-  if (!req.body.user_name) {
-    return next(new ClientError('Missing required user_name field', 400));
+app.post('/api/signUp/', (req, res, next) => {
+  if (!req.body.firstname) {
+    return next(new ClientError('Missing required firstname field', 400));
   }
-  if (!req.body.user_email) {
+  if (!req.body.lastname) {
+    return next(new ClientError('Missing required lastname field', 400));
+  }
+  if (!req.body.email) {
     return next(new ClientError('Missing required user_email field', 400));
   }
-  if (!req.body.user_password) {
+  if (!req.body.password) {
     return next(new ClientError('Missing required user_password field', 400));
   }
   const sql = `
-  INSERT INTO "user_info" ("user_name", "user_email", "user_password")
-  VALUES                  ($1, $2, $3)
+  INSERT INTO "users" ("firstname", "lastname", "email", "password")
+  VALUES                  ($1, $2, $3, $4)
   RETURNING *;
   `;
-  const params = [req.body.user_name, req.body.user_email, req.body.user_password];
+  const params = [req.body.firstname, req.body.lastname, req.body.email, req.body.password];
   db.query(sql, params)
     .then(result => {
       const row = result.rows[0];

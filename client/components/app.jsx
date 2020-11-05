@@ -12,10 +12,12 @@ export default class App extends React.Component {
       view: {
         name: 'home',
         params: {}
-      }
+      },
+      user: {}
     };
     this.setView = this.setView.bind(this);
     this.login = this.login.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +42,7 @@ export default class App extends React.Component {
     const password = loginInfo.user_password;
     fetch('/api/login/' + email + '/' + password, {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json'}
     })
       .then(response => {
         if (response.status === 400 || response.status === 404) {
@@ -50,12 +52,35 @@ export default class App extends React.Component {
           const p = document.getElementById('user_password');
           p.style.borderColor = 'red';
         } else {
+          response.json()
+   
+        }
+      })
+      .then(data => this.setState({user: data}));
+  }
+
+  signUp(signupInfo) {
+    fetch('/api/signUp/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(signupInfo)
+    })
+      .then(response => {
+        if (response.status === 400 || response.status === 404) {
+          const e = document.getElementById('user_email');
+          e.style.borderColor = 'red';
+          const p = document.getElementById('user_password');
+          p.style.borderColor = 'red';
+          const u = document.getElementById('user_first');
+          u.style.borderColor = 'red';
+          const f = document.getElementById('user_last');
+          f.style.borderColor = 'red';
+        } else {
           response.json();
           this.setView('main', {});
         }
       });
   }
-
 
   render() {
     const view = (this.state.view.name === 'home')
@@ -63,7 +88,7 @@ export default class App extends React.Component {
       : (this.state.view.name === 'login')
         ? <Login setView = {this.setView} login={this.login}/>
         : (this.state.view.name ==='signup')
-          ? <SignUp setView = {this.setView}/>
+          ? <SignUp setView = {this.setView} signUp={this.signUp}/>
           : null
     return (
     <div>
