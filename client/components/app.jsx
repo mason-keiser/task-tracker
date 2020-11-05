@@ -13,7 +13,7 @@ export default class App extends React.Component {
         name: 'home',
         params: {}
       },
-      user: {}
+      user: null
     };
     this.setView = this.setView.bind(this);
     this.login = this.login.bind(this);
@@ -52,11 +52,13 @@ export default class App extends React.Component {
           const p = document.getElementById('user_password');
           p.style.borderColor = 'red';
         } else {
-          response.json()
-   
+          return response.json();
         }
       })
-      .then(data => this.setState({user: data}));
+      .then(result => {
+        this.setState({ user: result[0]})
+      })
+
   }
 
   signUp(signupInfo) {

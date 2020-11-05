@@ -5,7 +5,7 @@ export default class Login extends React.Component {
         super(props);
         this.state = {
             user_email: '',
-            user_password: '',
+            user_password: ''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -18,8 +18,7 @@ export default class Login extends React.Component {
       user_email: this.state.user_email,
       user_password: this.state.user_password
     };
-    callback(obj);
-
+    callback(obj)
   }
 
   handleChange(event) {
