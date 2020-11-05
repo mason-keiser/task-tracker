@@ -52,7 +52,7 @@ body {
 }
 
 .password {
-    padding-right: 2.7rem;
+    padding-right: 3rem;
 }
 
 .loginButton {
@@ -97,6 +97,16 @@ body {
     }
 
     .password {
-        padding-right: 3.4rem;
+        padding-right: 3.3rem;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .login-group {
+        font-size: 16px;
+    }
+
+    .password {
+        padding-right: 2rem;
     }
 }

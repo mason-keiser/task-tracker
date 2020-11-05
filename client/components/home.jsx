@@ -14,7 +14,7 @@ export default class Home extends React.Component {
           <div className="homeButtons">
               <div onClick={() => this.props.setView('login', {})}>Login</div>
               <div onClick={() => this.props.setView('signup', {})}>Signup</div>
-              <h3>Guest</h3>
+              <div>Guest</div>
           </div>
         </div>
       )
