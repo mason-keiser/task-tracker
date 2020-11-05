@@ -1,12 +1,18 @@
 import React from 'react';
+import Home from './home';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       message: null,
-      isLoading: true
+      isLoading: true,
+      view: {
+        name: 'home',
+        params: {}
+      }
     };
+    this.setView = this.setView.bind(this);
   }
 
   componentDidMount() {
@@ -17,9 +23,23 @@ export default class App extends React.Component {
       .finally(() => this.setState({ isLoading: false }));
   }
 
+  setView(names, params) {
+    this.setState({
+      view: {
+        name: names,
+        params: params
+      }
+    });
+  }
+
   render() {
-    return this.state.isLoading
-      ? <h1>Testing connections...</h1>
-      : <h1>{ this.state.message.toUpperCase() }</h1>;
+    const view = (this.state.view.name === 'home')
+      ? <Home setView = {this.setView}/>
+      : null
+    return (
+    <div>
+      {view}
+    </div>
+    )
   }
 }

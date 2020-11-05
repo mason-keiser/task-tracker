@@ -1,0 +1,62 @@
+body {
+    margin: 0 0 0 0;
+    font-family: 'Corsa Grotesk', 'Corsa Grotesk Thin', sans-serif;
+    
+}
+  
+* {
+    box-sizing: border-box;
+    font-size: 1rem;
+    animation: fade-in 1s;
+}
+
+.homepageContainer {
+    height: 100vh;
+    width: 100%;
+    background-color: #FFFAFA;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.homeTitle > h1 {
+    font-size: 50px;
+    text-align: center;
+}
+
+.homeButtons{
+    text-align: center;
+    vertical-align: middle;
+}
+
+.homeButtons > div {
+    border: black solid 1px;
+    border-radius: 3%;
+    font-size: 20px;
+    width: 125px;
+    margin: 0 auto;
+    margin-top: 1rem;
+    padding: 5px;
+}
+
+@media screen and (min-width: 700px) {
+    .homeButtons > div {
+        width: 10%;
+    }
+
+    .homeButtons {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+
+    .homeButtons > div {
+        margin: 30px;
+    }
+
+    .homeButtons > h3 {
+        margin: 30px;
+        padding-top: 1rem;
+    }
+}
