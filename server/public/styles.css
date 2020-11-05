@@ -6,7 +6,7 @@ body {
   
 * {
     box-sizing: border-box;
-    font-size: 1rem;
+ 
     animation: fade-in 1s;
 }
 
@@ -30,21 +30,42 @@ body {
 .homeButtons{
     text-align: center;
     vertical-align: middle;
+    cursor: pointer;
 }
 
 .homeButtons > div {
-    border: black solid 1px;
-    border-radius: 3%;
     font-size: 20px;
-    width: 125px;
+    width: 105px;
     margin: 0 auto;
     margin-top: 1rem;
     padding: 5px;
 }
 
+.greeting {
+    text-align: center;
+    font-size: 29px;
+}
+
+.login-group {
+    font-size: 20px;
+    text-align: center;
+}
+
+.password {
+    padding-right: 2.7rem;
+}
+
+.loginButton {
+    font-size: 20px;
+    margin-top: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 @media screen and (min-width: 700px) {
     .homeButtons > div {
-        width: 10%;
+        width: 8%;
     }
 
     .homeButtons {
@@ -60,9 +81,22 @@ body {
     .homeButtons > h3 {
         margin: 30px;
         padding-top: 0.5rem;
+        width: 8%;
     }
 
     .homepageContainer {
         background-repeat: round;
+    }
+
+    .greeting {
+        font-size: 35px;
+    }
+
+    .login-group {
+        font-size: 25px;
+    }
+
+    .password {
+        padding-right: 3.4rem;
     }
 }

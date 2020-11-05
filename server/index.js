@@ -19,6 +19,69 @@ app.get('/api/health-check', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/users', (req, res, next) => {
+  const sql = `
+    SELECT *
+    FROM "users"
+    `;
+  db.query(sql)
+    .then(result => res.json(result.rows))
+    .catch(err => next(err));
+});
+
+//  SIGN UP API POST REQUEST THAT ADDS USER INFO TO DB
+// GO THROUGH DB TO ADJUST SIGNUP POSTGRESQL
+
+app.post('/api/signUp', (req, res, next) => {
+  if (!req.body.user_name) {
+    return next(new ClientError('Missing required user_name field', 400));
+  }
+  if (!req.body.user_email) {
+    return next(new ClientError('Missing required user_email field', 400));
+  }
+  if (!req.body.user_password) {
+    return next(new ClientError('Missing required user_password field', 400));
+  }
+  const sql = `
+  INSERT INTO "user_info" ("user_name", "user_email", "user_password")
+  VALUES                  ($1, $2, $3)
+  RETURNING *;
+  `;
+  const params = [req.body.user_name, req.body.user_email, req.body.user_password];
+  db.query(sql, params)
+    .then(result => {
+      const row = result.rows[0];
+      res.status(201).json(row);
+    });
+});
+
+//  SEARCH DATABASE FOR EXISTING USER_EMAIL AND USER_PASSWORD API GET REQUEST
+// GO THROUGH DB TO ADJUST LOGIN POTGRESQL 
+
+app.get('/api/login/:user_email/:user_password', (req, res, next) => {
+  const email = req.params.user_email;
+  const password = req.params.user_password;
+  const sql = `
+  SELECT * FROM "user_info"
+  WHERE "user_email" = $1 
+  AND "user_password" = $2;
+  `;
+  const params = [req.params.user_email, req.params.user_password];
+  db.query(sql, params)
+    .then(result => {
+      if (!result.rows[0]) {
+        return res.status(400).json({ message: `No user information contains: ${email} or ${password}` });
+      } else {
+        return res.status(200).json(result.rows);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({ error: 'An unexpected error occurred.' });
+    });
+});
+
+
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
 });
