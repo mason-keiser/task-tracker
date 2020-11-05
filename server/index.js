@@ -55,7 +55,7 @@ app.post('/api/signUp', (req, res, next) => {
     });
 });
 
-//  SEARCH DATABASE FOR EXISTING USER_EMAIL AND USER_PASSWORD API GET REQUEST
+//  SEARCH DATABASE FOR EXISTING EMAIL AND PASSWORD API GET REQUEST
 
 app.get('/api/login/:email/:password', (req, res, next) => {
   const email = req.params.email;
