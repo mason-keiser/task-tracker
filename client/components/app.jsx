@@ -15,6 +15,7 @@ export default class App extends React.Component {
       }
     };
     this.setView = this.setView.bind(this);
+    this.login = this.login.bind(this);
   }
 
   componentDidMount() {
@@ -34,11 +35,33 @@ export default class App extends React.Component {
     });
   }
 
+  login(loginInfo) {
+    const email = loginInfo.user_email;
+    const password = loginInfo.user_password;
+    fetch('/api/login/' + email + '/' + password, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    })
+      .then(response => {
+        if (response.status === 400 || response.status === 404) {
+          console.log('incorrect user_email / user_password combo');
+          const e = document.getElementById('user_email');
+          e.style.borderColor = 'red';
+          const p = document.getElementById('user_password');
+          p.style.borderColor = 'red';
+        } else {
+          response.json();
+          this.setView('main', {});
+        }
+      });
+  }
+
+
   render() {
     const view = (this.state.view.name === 'home')
       ? <Home setView = {this.setView}/>
       : (this.state.view.name === 'login')
-        ? <Login setView = {this.setView}/>
+        ? <Login setView = {this.setView} login={this.login}/>
         : (this.state.view.name ==='signup')
           ? <SignUp setView = {this.setView}/>
           : null

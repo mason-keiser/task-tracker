@@ -12,13 +12,14 @@ export default class Login extends React.Component {
     }
 
 
-  handleSubmit(callback, event) {
+  handleSubmit(callback) {
     event.preventDefault();
     const obj = {
       user_email: this.state.user_email,
       user_password: this.state.user_password
     };
     callback(obj);
+
   }
 
   handleChange(event) {
