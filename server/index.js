@@ -82,7 +82,29 @@ app.get('/api/login/:email/:password', (req, res, next) => {
     });
 });
 
-//UPDATE CHECKLIST ITEM REST API
+// CREATE CHECKLIST ITEM REST API
+
+app.post('/api/post', (req, res, next) => {
+  const userId = req.body.userid;
+  const checklistItem = req.body.checklistitem;
+  const isCompleted = false;
+  const sqlQuery = `
+            INSERT INTO checklistitems (userid, checklistitem, iscomplete)
+            VALUES ($1, $2, $3)
+          `;
+  const params = [
+    userId,
+    checklistItem,
+    isCompleted
+  ];
+  db.query(sqlQuery, params)
+    .then(result => res.status(201).json({
+      message: 'Checklist item created successfully'
+    }))
+    .catch(err => next(err));
+})
+
+// UPDATE CHECKLIST ITEM REST API
 
 app.put('/api/update/', (req, res, next) => {
   const updatedChecklistItem = req.body.updatedChecklistitem;
