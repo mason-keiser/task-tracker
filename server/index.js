@@ -93,14 +93,12 @@ app.put('/api/update/', (req, res, next) => {
                SET checklistitem = $1
              WHERE checklistitemid = $2
           `;
-  const params = [
-    updatedChecklistItem,
-    checklistItemId
-  ];
+  const params = [updatedChecklistItem, checklistItemId];
   db.query(sqlQuery, params)
-    .then(result => res.status(202).json({
-      message: 'Checklist item updated successfully'
-    }))
+    .then(result => {
+      res.status(202).json({message: 'Checklist item updated successfully'})
+      return result 
+    })
     .catch(err => next(err));
 });
 
@@ -112,13 +110,44 @@ app.delete('/api/delete', (req, res ,next) => {
           DELETE FROM checklistitems
                 WHERE checklistitemid = $1
         `;
-  const params = [
-    checklistitemid
-  ];
+  const params = [checklistitemid];
+
   db.query(sqlQuery, params)
-    .then(result => res.status(202).json({
-      message: 'Checklist item deleted successfully'
-    }))
+    .then(result => {
+      res.status(202).json({message: 'Checklist item deleted successfully'})
+      return result
+    })
+    .catch(err => next(err));
+})
+
+//TOGGLE CHANGE TO ISCOMPLETE ON CHECKLIST ITEM 
+
+app.put('/api/isComplete', (req, res, next) => {
+  const checklistItemId = req.body.checklistitemid;
+  const getQuery = `
+    SELECT *
+      FROM checklistitems
+      WHERE checklistitemid = $1
+  `;
+
+  const getParams = [checklistItemId];
+
+  db.query(getQuery, getParams)
+    .then(result => {
+      const isCompleted = !result.rows[0].iscomplete;
+      const updateQuery = `
+        UPDATE checklistitems
+            SET iscomplete = $1
+          WHERE checklistitemid = $2
+      `;
+      const updateParams = [isCompleted, checklistItemId];
+
+      db.query(updateQuery, updateParams)
+        .then(result => res.json({
+          message: 'Checklist item updated successfully'
+        }))
+        .catch(err => next(err));
+    })
     .catch(err => next(err));
 })
 
