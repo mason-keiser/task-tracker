@@ -63,8 +63,8 @@ export default class App extends React.Component {
           firstname: result[0].firstname,
           userId: result[0].userid
         }})
+        this.setView('main', this.state.user)
       })
-
   }
 
   signUp(signupInfo) {
@@ -84,10 +84,16 @@ export default class App extends React.Component {
           const f = document.getElementById('user_last');
           f.style.borderColor = 'red';
         } else {
-          response.json();
-          this.setView('main', {});
+          return response.json();
         }
-      });
+      })
+      .then(result => {
+        this.setState({ user: {
+          firstname: result.firstname,
+          userId: result.userid
+        }})
+        this.setView('main', this.state.user)
+      })
   }
 
   render() {
