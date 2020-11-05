@@ -16,20 +16,20 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE IF EXISTS ONLY public.checklistitems DROP CONSTRAINT IF EXISTS checklistitems_userid_fkey;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_pkey;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_lastname_key;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_firstname_key;
 ALTER TABLE IF EXISTS ONLY public.users DROP CONSTRAINT IF EXISTS users_email_key;
-ALTER TABLE IF EXISTS ONLY public.checklist DROP CONSTRAINT IF EXISTS checklist_pkey;
-ALTER TABLE IF EXISTS ONLY public.checklist DROP CONSTRAINT IF EXISTS checklist_checklistitem_key;
+ALTER TABLE IF EXISTS ONLY public.checklistitems DROP CONSTRAINT IF EXISTS checklistitems_pkey;
 ALTER TABLE IF EXISTS public.users ALTER COLUMN userid DROP DEFAULT;
-ALTER TABLE IF EXISTS public.checklist ALTER COLUMN checklistitemid DROP DEFAULT;
-ALTER TABLE IF EXISTS public.checklist ALTER COLUMN userid DROP DEFAULT;
+ALTER TABLE IF EXISTS public.checklistitems ALTER COLUMN checklistitemid DROP DEFAULT;
+ALTER TABLE IF EXISTS public.checklistitems ALTER COLUMN userid DROP DEFAULT;
 DROP SEQUENCE IF EXISTS public.users_userid_seq;
 DROP TABLE IF EXISTS public.users;
-DROP SEQUENCE IF EXISTS public.checklist_userid_seq;
-DROP SEQUENCE IF EXISTS public.checklist_checklistitemid_seq;
-DROP TABLE IF EXISTS public.checklist;
+DROP SEQUENCE IF EXISTS public.checklistitems_userid_seq;
+DROP SEQUENCE IF EXISTS public.checklistitems_checklistitemid_seq;
+DROP TABLE IF EXISTS public.checklistitems;
 DROP EXTENSION IF EXISTS plpgsql;
 DROP SCHEMA IF EXISTS public;
 --
@@ -65,22 +65,22 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: checklist; Type: TABLE; Schema: public; Owner: -
+-- Name: checklistitems; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.checklist (
+CREATE TABLE public.checklistitems (
     userid integer NOT NULL,
     checklistitemid integer NOT NULL,
     checklistitem character varying(1000) NOT NULL,
-    iscompleted boolean NOT NULL
+    iscomplete boolean
 );
 
 
 --
--- Name: checklist_checklistitemid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: checklistitems_checklistitemid_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.checklist_checklistitemid_seq
+CREATE SEQUENCE public.checklistitems_checklistitemid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -90,17 +90,17 @@ CREATE SEQUENCE public.checklist_checklistitemid_seq
 
 
 --
--- Name: checklist_checklistitemid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: checklistitems_checklistitemid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.checklist_checklistitemid_seq OWNED BY public.checklist.checklistitemid;
+ALTER SEQUENCE public.checklistitems_checklistitemid_seq OWNED BY public.checklistitems.checklistitemid;
 
 
 --
--- Name: checklist_userid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: checklistitems_userid_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.checklist_userid_seq
+CREATE SEQUENCE public.checklistitems_userid_seq
     AS integer
     START WITH 1
     INCREMENT BY 1
@@ -110,10 +110,10 @@ CREATE SEQUENCE public.checklist_userid_seq
 
 
 --
--- Name: checklist_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: checklistitems_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.checklist_userid_seq OWNED BY public.checklist.userid;
+ALTER SEQUENCE public.checklistitems_userid_seq OWNED BY public.checklistitems.userid;
 
 
 --
@@ -150,17 +150,17 @@ ALTER SEQUENCE public.users_userid_seq OWNED BY public.users.userid;
 
 
 --
--- Name: checklist userid; Type: DEFAULT; Schema: public; Owner: -
+-- Name: checklistitems userid; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.checklist ALTER COLUMN userid SET DEFAULT nextval('public.checklist_userid_seq'::regclass);
+ALTER TABLE ONLY public.checklistitems ALTER COLUMN userid SET DEFAULT nextval('public.checklistitems_userid_seq'::regclass);
 
 
 --
--- Name: checklist checklistitemid; Type: DEFAULT; Schema: public; Owner: -
+-- Name: checklistitems checklistitemid; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.checklist ALTER COLUMN checklistitemid SET DEFAULT nextval('public.checklist_checklistitemid_seq'::regclass);
+ALTER TABLE ONLY public.checklistitems ALTER COLUMN checklistitemid SET DEFAULT nextval('public.checklistitems_checklistitemid_seq'::regclass);
 
 
 --
@@ -171,11 +171,12 @@ ALTER TABLE ONLY public.users ALTER COLUMN userid SET DEFAULT nextval('public.us
 
 
 --
--- Data for Name: checklist; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: checklistitems; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.checklist (userid, checklistitemid, checklistitem, iscompleted) FROM stdin;
-1	1	this is the first thing on my agenda today	f
+COPY public.checklistitems (userid, checklistitemid, checklistitem, iscomplete) FROM stdin;
+1	1	this is an item for the new table	t
+4	2	this is a new checklist item	t
 \.
 
 
@@ -185,44 +186,39 @@ COPY public.checklist (userid, checklistitemid, checklistitem, iscompleted) FROM
 
 COPY public.users (userid, firstname, lastname, password, email) FROM stdin;
 1	Mason	Keiser	6679309	mkman@gmail.com
+2	Jimmy	Rodriguez	1234	jrod69@aol.com
+3	Melissa	Kim	sirius	melissakim96@gmail.com
+4	Cara	Harshman	1973	kraw@gmail.com
 \.
 
 
 --
--- Name: checklist_checklistitemid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: checklistitems_checklistitemid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.checklist_checklistitemid_seq', 1, true);
+SELECT pg_catalog.setval('public.checklistitems_checklistitemid_seq', 1, true);
 
 
 --
--- Name: checklist_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: checklistitems_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.checklist_userid_seq', 1, true);
+SELECT pg_catalog.setval('public.checklistitems_userid_seq', 1, true);
 
 
 --
 -- Name: users_userid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_userid_seq', 1, true);
+SELECT pg_catalog.setval('public.users_userid_seq', 4, true);
 
 
 --
--- Name: checklist checklist_checklistitem_key; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: checklistitems checklistitems_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.checklist
-    ADD CONSTRAINT checklist_checklistitem_key UNIQUE (checklistitem);
-
-
---
--- Name: checklist checklist_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.checklist
-    ADD CONSTRAINT checklist_pkey PRIMARY KEY (checklistitemid);
+ALTER TABLE ONLY public.checklistitems
+    ADD CONSTRAINT checklistitems_pkey PRIMARY KEY (checklistitemid);
 
 
 --
@@ -255,6 +251,14 @@ ALTER TABLE ONLY public.users
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (userid);
+
+
+--
+-- Name: checklistitems checklistitems_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.checklistitems
+    ADD CONSTRAINT checklistitems_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid);
 
 
 --
