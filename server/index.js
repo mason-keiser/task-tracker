@@ -56,17 +56,16 @@ app.post('/api/signUp', (req, res, next) => {
 });
 
 //  SEARCH DATABASE FOR EXISTING USER_EMAIL AND USER_PASSWORD API GET REQUEST
-// GO THROUGH DB TO ADJUST LOGIN POTGRESQL 
 
-app.get('/api/login/:user_email/:user_password', (req, res, next) => {
-  const email = req.params.user_email;
-  const password = req.params.user_password;
+app.get('/api/login/:email/:password', (req, res, next) => {
+  const email = req.params.email;
+  const password = req.params.password;
   const sql = `
-  SELECT * FROM "user_info"
-  WHERE "user_email" = $1 
-  AND "user_password" = $2;
+  SELECT * FROM "users"
+  WHERE "email" = $1 
+  AND "password" = $2;
   `;
-  const params = [req.params.user_email, req.params.user_password];
+  const params = [req.params.email, req.params.password];
   db.query(sql, params)
     .then(result => {
       if (!result.rows[0]) {

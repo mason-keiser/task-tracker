@@ -33,6 +33,7 @@ export default class Login extends React.Component {
     render() {
         return (
           <div className='homepageContainer'>
+            <div className='backButton' onClick={()=> {this.props.setView('home', {})}}>Back Home</div>
             <div className='greeting '>
               <h2>Welcome Back</h2>
             </div>

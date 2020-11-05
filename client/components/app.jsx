@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './home';
 import Login from './login';
+import SignUp from './signup';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -37,8 +38,10 @@ export default class App extends React.Component {
     const view = (this.state.view.name === 'home')
       ? <Home setView = {this.setView}/>
       : (this.state.view.name === 'login')
-        ? <Login/>
-        : null
+        ? <Login setView = {this.setView}/>
+        : (this.state.view.name ==='signup')
+          ? <SignUp setView = {this.setView}/>
+          : null
     return (
     <div>
       {view}
