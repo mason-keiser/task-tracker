@@ -82,6 +82,28 @@ app.get('/api/login/:email/:password', (req, res, next) => {
     });
 });
 
+//UPDATE CHECKLIST ITEM 
+app.put('/api/update/', (req, res, next) => {
+  const updatedChecklistItem = req.body.updatedChecklistitem;
+  const checklistItemId = req.body.checklistitemid;
+
+  const sqlQuery = `
+            UPDATE checklistitems
+               SET checklistitem = $1
+             WHERE checklistitemid = $2
+          `;
+  const params = [
+    updatedChecklistItem,
+    checklistItemId
+  ];
+  db.query(sqlQuery, params)
+    .then(result => res.status(202).json({
+      message: 'Checklist item updated successfully'
+    }))
+    .catch(err => next(err));
+});
+
+
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
