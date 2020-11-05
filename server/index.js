@@ -82,7 +82,8 @@ app.get('/api/login/:email/:password', (req, res, next) => {
     });
 });
 
-//UPDATE CHECKLIST ITEM 
+//UPDATE CHECKLIST ITEM REST API
+
 app.put('/api/update/', (req, res, next) => {
   const updatedChecklistItem = req.body.updatedChecklistitem;
   const checklistItemId = req.body.checklistitemid;
@@ -103,7 +104,23 @@ app.put('/api/update/', (req, res, next) => {
     .catch(err => next(err));
 });
 
+// DELETE CHECKLIST ITEM REST API
 
+app.delete('/api/delete', (req, res ,next) => {
+  const checklistitemid = req.body.checklistitemid;
+  const sqlQuery = `
+          DELETE FROM checklistitems
+                WHERE checklistitemid = $1
+        `;
+  const params = [
+    checklistitemid
+  ];
+  db.query(sqlQuery, params)
+    .then(result => res.status(202).json({
+      message: 'Checklist item deleted successfully'
+    }))
+    .catch(err => next(err));
+})
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
