@@ -13,7 +13,10 @@ export default class App extends React.Component {
         name: 'home',
         params: {}
       },
-      user: null
+      user: {
+        firstname: '',
+        userId: null
+      }
     };
     this.setView = this.setView.bind(this);
     this.login = this.login.bind(this);
@@ -56,7 +59,10 @@ export default class App extends React.Component {
         }
       })
       .then(result => {
-        this.setState({ user: result[0]})
+        this.setState({ user: {
+          firstname: result[0].firstname,
+          userId: result[0].userid
+        }})
       })
 
   }
