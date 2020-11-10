@@ -13,8 +13,8 @@ export default class Mainpage extends React.Component {
     handleSubmit(callback) {
         event.preventDefault();
         const obj = {
-          checklistitem: this.state.checklistitem,
-          userid: this.props.userid
+          userid: Number(this.props.user.userId),
+          checklistitem: this.state.checklistitem
         };
         callback(obj)
     }
@@ -31,8 +31,9 @@ export default class Mainpage extends React.Component {
                 <div className="homeTitle">
                     <h1>Add New Checklist Item</h1>
                 </div>
-                <div className="formContainer">
-                    <form onSubmit={this.handleSubmit} className='mt-5'>
+                <div >
+                    <div className="formContainer mt-3">
+                    <form onSubmit={() => this.handleSubmit(this.props.addItem)} className=''>
                         <div>
                             <input type="text" placeholder='description' id='checklistitem' onChange={this.handleChange}/>
                         </div>
@@ -40,6 +41,7 @@ export default class Mainpage extends React.Component {
                         <button type='submit' className='btn loginButton mt-2' style={{ borderRadius: '5%', border: 'none'}}>Submit</button>
                         </div>
                     </form>
+                    </div>
                 </div>
             </div>
         )

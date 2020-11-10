@@ -82,7 +82,7 @@ app.get('/api/login/:email/:password', (req, res, next) => {
     });
 });
 
-// CREATE CHECKLIST ITEM REST API
+// CREATE CHECKLIST ITEM API
 
 app.post('/api/post', (req, res, next) => {
   const userId = req.body.userid;
@@ -104,7 +104,7 @@ app.post('/api/post', (req, res, next) => {
     .catch(err => next(err));
 })
 
-// UPDATE CHECKLIST ITEM REST API
+// UPDATE CHECKLIST ITEM API
 
 app.put('/api/update/', (req, res, next) => {
   const updatedChecklistItem = req.body.updatedChecklistitem;
@@ -142,7 +142,7 @@ app.delete('/api/delete', (req, res ,next) => {
     .catch(err => next(err));
 })
 
-//TOGGLE CHANGE TO ISCOMPLETE ON CHECKLIST ITEM 
+//TOGGLE CHANGE TO ISCOMPLETE ON CHECKLIST ITEM API
 
 app.put('/api/isComplete', (req, res, next) => {
   const checklistItemId = req.body.checklistitemid;

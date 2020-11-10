@@ -23,6 +23,7 @@ export default class App extends React.Component {
     this.setView = this.setView.bind(this);
     this.login = this.login.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.addChecklistItem = this.addChecklistItem.bind(this);
   }
 
   componentDidMount() {
@@ -98,6 +99,24 @@ export default class App extends React.Component {
       })
   }
 
+  addChecklistItem(itemInfo) {
+    fetch('/api/post', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(itemInfo)
+    })
+      .then(response => {
+        if (response.status === 400 || response.status === 404) {
+          const e = document.getElementById('checklistitem');
+          e.style.borderColor = 'red';
+        } else {
+          response.json();
+        }
+       
+      })
+      .then(result => console.log(result))
+  }
+
   render() {
     const header= (this.state.view.name === 'main')
       ? <Header user={this.state.user} setView={this.setView}/>
@@ -110,7 +129,7 @@ export default class App extends React.Component {
         : (this.state.view.name ==='signup')
           ? <SignUp setView = {this.setView} signUp={this.signUp}/>
           : (this.state.view.name === 'main')
-            ? <Mainpage setView={this.setView} user={this.state.user}/>
+            ? <Mainpage setView={this.setView} user={this.state.user} addItem={this.addChecklistItem}/>
             : null
     return (
     <div>
