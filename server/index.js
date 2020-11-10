@@ -91,6 +91,7 @@ app.post('/api/post', (req, res, next) => {
   const sqlQuery = `
             INSERT INTO checklistitems (userid, checklistitem, iscomplete)
             VALUES ($1, $2, $3)
+            RETURNING *
           `;
   const params = [
     userId,
