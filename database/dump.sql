@@ -175,8 +175,19 @@ ALTER TABLE ONLY public.users ALTER COLUMN userid SET DEFAULT nextval('public.us
 --
 
 COPY public.checklistitems (userid, checklistitemid, checklistitem, iscomplete) FROM stdin;
-1	1	this is an item for the new table	t
-4	2	this is a new checklist item	t
+1	1	updated checklist item	t
+2	2	get a dog for mel	f
+4	7	finish frontend of this application	f
+1	13	asdfsdafasdfs	f
+1	14	this is added from the fe	f
+1	15	added this item to check the response	f
+1	18	This todo is from my iphone	f
+1	19	brand new todo	f
+1	20	new todo to be added	f
+1	21	this resets the input	f
+1	22	reset input	f
+1	16	this is a new item with a response	t
+1	17		t
 \.
 
 
@@ -196,7 +207,7 @@ COPY public.users (userid, firstname, lastname, password, email) FROM stdin;
 -- Name: checklistitems_checklistitemid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.checklistitems_checklistitemid_seq', 1, true);
+SELECT pg_catalog.setval('public.checklistitems_checklistitemid_seq', 22, true);
 
 
 --
