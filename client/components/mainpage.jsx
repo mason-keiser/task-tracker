@@ -33,7 +33,7 @@ export default class Mainpage extends React.Component {
                 </div>
                 <div >
                     <div className="formContainer mt-3">
-                    <form onSubmit={() => this.handleSubmit(this.props.addItem)} className=''>
+                    <form onSubmit={() => this.handleSubmit(this.props.addItem)} id='todo'>
                         <div>
                             <input type="text" placeholder='description' id='checklistitem' onChange={this.handleChange}/>
                         </div>

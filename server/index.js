@@ -143,7 +143,7 @@ app.delete('/api/delete', (req, res ,next) => {
     .catch(err => next(err));
 })
 
-//TOGGLE CHANGE TO ISCOMPLETE ON CHECKLIST ITEM API
+// TOGGLE CHANGE TO ISCOMPLETE ON CHECKLIST ITEM API
 
 app.put('/api/isComplete', (req, res, next) => {
   const checklistItemId = req.body.checklistitemid;
@@ -172,6 +172,32 @@ app.put('/api/isComplete', (req, res, next) => {
         .catch(err => next(err));
     })
     .catch(err => next(err));
+})
+
+// SEARCH DB FOR COMPLETE ITEMS
+
+app.get('/api/complete', (req, res, next) => {
+  const userid = req.body.userid
+  const isComplete = req.body.iscomplete
+  const getQuery = `
+    SELECT *
+      FROM checklistitems
+      WHERE iscomplete = $1
+      AND userid = $2
+  `
+  const updateParams = [isComplete, userid];
+  db.query(getQuery, updateParams)
+  .then(result => {
+    if (!result.rows[0]) {
+      return res.status(400).json({ message: `No user information checklist items for: ${userid}` });
+    } else {
+      return res.status(200).json(result.rows);
+    }
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({ error: 'An unexpected error occurred.' });
+  });
 })
 
 app.use('/api', (req, res, next) => {

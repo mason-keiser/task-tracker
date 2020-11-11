@@ -19,7 +19,7 @@ export default class SignUp extends React.Component {
     const obj = {
       firstname: this.state.user_first,
       lastname: this.state.user_last,
-      email: this.state.user_email,
+      email: this.state.user_email.toLowerCase(),
       password: this.state.user_password
     };
     callback(obj)

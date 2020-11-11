@@ -110,7 +110,7 @@ export default class App extends React.Component {
           const e = document.getElementById('checklistitem');
           e.style.borderColor = 'red';
         } else {
-          console.log(response);
+          document.getElementById('todo').reset();
         }
       })
   }
