@@ -158,6 +158,8 @@ app.put('/api/isComplete', (req, res, next) => {
   db.query(getQuery, getParams)
     .then(result => {
       const isCompleted = !result.rows[0].iscomplete;
+      const checklistItem = result.rows[0].checklistitem
+      const checkid = result.rows[0].checklistitemid
       const updateQuery = `
         UPDATE checklistitems
             SET iscomplete = $1
@@ -167,7 +169,10 @@ app.put('/api/isComplete', (req, res, next) => {
 
       db.query(updateQuery, updateParams)
         .then(result => res.json({
-          message: 'Checklist item updated successfully'
+          message: 'Checklist item updated successfully',
+          iscomplete: isCompleted,
+          checklistitem: checklistItem,
+          checklistitemid: checkid
         }))
         .catch(err => next(err));
     })
