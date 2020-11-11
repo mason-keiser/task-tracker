@@ -49,7 +49,6 @@ export default class NotComplete extends React.Component {
           .then(result => {
             console.log(result);
             document.getElementById('bool_update').textContent = result.iscomplete;
-            this.forceUpdate();
           })
       }  
 
@@ -62,8 +61,7 @@ export default class NotComplete extends React.Component {
             </div>
             
           )
-        : <div>
-          <h1>this is empty </h1>
+        : <div className='hompageContainer'>
         </div>
       return(
         <div className="listContainer2">

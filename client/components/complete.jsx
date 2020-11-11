@@ -53,7 +53,6 @@ export default class Complete extends React.Component {
             .then(result => {
               console.log(result)
               document.getElementById('bool_update').textContent = result.iscomplete
-              this.forceUpdate();
             })
         }  
 // Write conditional on render if state is null : not null to render mapped out objects
@@ -66,7 +65,7 @@ export default class Complete extends React.Component {
             </div>
           )
         : <div>
-        <h1>this is empty </h1>
+
       </div>
         return (
             <div className="listContainer2">
