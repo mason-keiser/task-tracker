@@ -146,6 +146,24 @@ body {
     overflow-y: scroll;
 }
 
+.deleteButton {
+    cursor: pointer;
+    text-align: center;
+    color: red;
+    padding-left: 20px;
+}
+
+.deleteButton:hover {
+    transition: .3s all;
+    text-decoration: none;
+    background: linear-gradient(-45deg, orange, red);
+    color: white;
+    width: 30%;
+    height: 20%;
+    padding-left: 0;
+    margin-left: 20px;
+}
+
 .map {
     display: flex;
     flex-direction: row;
@@ -278,6 +296,16 @@ a {
         width: 30%;
         border-radius: 0%;
       }
+
+    .deleteButton:hover {
+        transition: .3s all;
+        text-decoration: none;
+        background: linear-gradient(-45deg, orange, red);
+        opacity: 80%;
+        color: white;
+        width: 20%;
+        border-radius: 0%;
+    }
 }
 
 @media screen and (orientation: landscape) and (max-height: 380px) {
