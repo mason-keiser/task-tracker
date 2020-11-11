@@ -31,9 +31,20 @@ export default class NotComplete extends React.Component {
       }
 
     render() {
+      const tert = (this.state.checklistitems !== null)
+        ? 
+          this.state.checklistitems.map((item, key) =>
+            <div className ='map' key={key}>{item.checklistitem}
+              <button className="ml-3 loginButton2">{item.iscomplete.toString()}</button>
+            </div>
+            
+          )
+        : null
       return(
-        <div className="homepageContainer">
-              
+        <div className="listContainer2">
+          <div className="bord">
+            {tert}
+          </div>
         </div>
       );
     }
