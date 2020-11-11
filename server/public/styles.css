@@ -75,6 +75,11 @@ body {
     background: none;
     border: none;
     cursor: pointer;
+    width: 20%;
+}
+
+.listContainer2 > h1{
+    text-align: center;
 }
 
 .loginButton2:hover {

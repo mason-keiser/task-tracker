@@ -45,6 +45,7 @@ export default class Complete extends React.Component {
         : null
         return (
             <div className="listContainer2">
+              <h1> Complete Items</h1>
               <div className='bord'>
                 {tert}
               </div>

@@ -42,7 +42,8 @@ export default class NotComplete extends React.Component {
         : null
       return(
         <div className="listContainer2">
-          <div className="bord">
+          <h1> Uncomplete Items</h1>
+          <div className="bord"> 
             {tert}
           </div>
         </div>
