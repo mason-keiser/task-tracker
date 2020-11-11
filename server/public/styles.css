@@ -283,7 +283,6 @@ a {
 @media screen and (orientation: landscape) and (max-height: 380px) {
     .listContainer2 {
         height: 100%;
-        background: round;
     }
 }
 

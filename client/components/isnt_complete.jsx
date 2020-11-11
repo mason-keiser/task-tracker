@@ -48,7 +48,7 @@ export default class NotComplete extends React.Component {
         })
           .then(result => {
             console.log(result);
-            document.getElementById('bool_update').textContent = result.iscomplete;
+       
           })
       }  
 
@@ -57,7 +57,7 @@ export default class NotComplete extends React.Component {
         ? 
           this.state.checklistitems.map((item, key) =>
             <div className ='map' key={key}>{item.checklistitem}
-              <button id='bool_update'onClick={() => this.handleClick(item.checklistitemid)} className="ml-3 loginButton2">{item.iscomplete.toString()}</button>
+              <button value={item.checklistitemid} id='bool_update'onClick={() => this.handleClick(item.checklistitemid)} className="ml-3 loginButton2">{item.iscomplete.toString()}</button>
             </div>
             
           )
