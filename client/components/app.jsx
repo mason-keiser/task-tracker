@@ -4,6 +4,8 @@ import Home from './home';
 import Login from './login';
 import Mainpage from './mainpage';
 import SignUp from './signup';
+import Complete from './complete';
+import NotComplete from './isnt_complete';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -18,7 +20,7 @@ export default class App extends React.Component {
       user: {
         firstname: '',
         userId: null
-      }
+      },
     };
     this.setView = this.setView.bind(this);
     this.login = this.login.bind(this);
@@ -116,7 +118,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    const header= (this.state.view.name === 'main')
+    const header= (this.state.view.name === 'main' || this.state.view.name === 'not-complete' || this.state.view.name === 'complete')
       ? <Header user={this.state.user} setView={this.setView}/>
       : null
 
@@ -128,7 +130,11 @@ export default class App extends React.Component {
           ? <SignUp setView = {this.setView} signUp={this.signUp}/>
           : (this.state.view.name === 'main')
             ? <Mainpage setView={this.setView} user={this.state.user} addItem={this.addChecklistItem}/>
-            : null
+            : (this.state.view.name === 'complete')
+              ? <Complete user={this.state.user} setView={this.setView}/>
+              : (this.state.view.name === 'not-complete')
+                ? <NotComplete setView={this.setView} user={this.state.user}/>
+                : null
     return (
     <div>
       {header}

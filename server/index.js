@@ -176,9 +176,9 @@ app.put('/api/isComplete', (req, res, next) => {
 
 // SEARCH DB FOR COMPLETE ITEMS
 
-app.get('/api/complete', (req, res, next) => {
-  const userid = req.body.userid
-  const isComplete = req.body.iscomplete
+app.get('/api/complete/:userid/:iscomplete', (req, res, next) => {
+  const userid = req.params.userid
+  const isComplete = req.params.iscomplete
   const getQuery = `
     SELECT *
       FROM checklistitems

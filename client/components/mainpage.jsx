@@ -38,7 +38,7 @@ export default class Mainpage extends React.Component {
                             <input type="text" placeholder='description' id='checklistitem' onChange={this.handleChange}/>
                         </div>
                         <div>
-                        <button type='button' value='submit' className='btn loginButton mt-2'>Submit</button>
+                        <button type='submit' value='submit' className='btn loginButton mt-2'>Submit</button>
                         </div>
                     </form>
                     </div>
