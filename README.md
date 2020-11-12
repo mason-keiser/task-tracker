@@ -54,3 +54,5 @@ pgweb --db=taskTracker
 ```
 npm run dev
 ```
+# Preview
+![](server/public/images/screen.png)
