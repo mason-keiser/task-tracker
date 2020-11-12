@@ -151,6 +151,8 @@ body {
     text-align: center;
     color: red;
     padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .deleteButton:hover {
@@ -296,6 +298,11 @@ a {
         width: 30%;
         border-radius: 0%;
       }
+
+    .deleteButton{
+        padding-bottom: 0;
+        padding-top: 0;
+    }
 
     .deleteButton:hover {
         transition: .3s all;
