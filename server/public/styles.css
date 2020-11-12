@@ -143,7 +143,8 @@ body {
     flex-direction: column;
     background-color: grey;
     background-repeat: round;
-    overflow-y: scroll;
+    overflow-y: auto;
+    padding-bottom: 2rem;
 }
 
 .deleteButton {
@@ -179,6 +180,8 @@ body {
     width: 90vw;
     max-height: inherit;
     overflow-x: auto;
+    align-items: center;
+    max-height: 20%;
 }
 
 .map >button {
@@ -241,6 +244,12 @@ a {
     border-radius: 0%;
   }
 
+  .itemTitle{
+    border: 1px solid black;
+    background-color: white;
+    padding: 10px;
+} 
+
 @media screen and (min-width: 700px) {
     .homeButtons > div {
         width: 8%;
@@ -271,6 +280,7 @@ a {
         padding-top: 20px;
         padding-bottom: 20px;
         font-size: larger;
+        max-height: 10%;
     }
 
     .greeting {
@@ -300,8 +310,16 @@ a {
       }
 
     .deleteButton{
-        padding-bottom: 0;
-        padding-top: 0;
+        padding-bottom: 4px;
+        padding-top: 4px;
+    }
+
+    .itemTitle{
+        border: 1px solid black;
+        padding: 15px;
+        margin-left: 5px;
+        overflow-x: scroll;
+        max-width: 50%;
     }
 
     .deleteButton:hover {
@@ -350,6 +368,14 @@ a {
 
     .deleteButton{
         padding-left: 0;
+    }
+
+    .loginButton2{
+        width: 80%;
+    }
+
+    .loginButton2:hover {
+        width: 80%;
     }
 }
 

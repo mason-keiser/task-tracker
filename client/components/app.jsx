@@ -113,7 +113,7 @@ export default class App extends React.Component {
           e.style.borderColor = 'red';
         } else {
           document.getElementById('todo').reset();
-          this.setView('not-complete', {})
+          this.setView('not-complete', {});
         }
       })
   }

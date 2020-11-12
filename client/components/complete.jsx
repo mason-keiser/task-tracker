@@ -58,7 +58,6 @@ export default class Complete extends React.Component {
           })
             .then(result => {
               console.log(result)
-              document.getElementById('bool_update').textContent = result.iscomplete
             })
         }
         
@@ -83,9 +82,10 @@ export default class Complete extends React.Component {
         ? 
           this.state.checklistitems.map((item, key) =>
           <div>
-            <div className ='map' key={key}>{item.checklistitem}
+            <div className ='map' key={key}>
+              <div className='itemTitle'>{item.checklistitem}</div>
               <div onClick={() => this.deleteId(item.checklistitemid)} className="mt-1 mb-1 fa-trash-fill deleteButton">Delete</div>
-              <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="mt-1 mb-1 loginButton2">{item.iscomplete.toString()}</button>
+              <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="mt-1 mb-1 loginButton2">Mark Active</button>
             </div>
           </div>
             
@@ -95,7 +95,7 @@ export default class Complete extends React.Component {
       </div>
         return (
             <div className="listContainer2">
-              <h1> Complete Items</h1>
+              <h1> Inactive Items</h1>
               <div className='bord'>
                 {tert}
               </div>

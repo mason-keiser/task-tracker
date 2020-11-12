@@ -82,9 +82,10 @@ export default class NotComplete extends React.Component {
         ? 
           this.state.checklistitems.map((item, key) =>
           <div>
-            <div className ='map' key={key}>{item.checklistitem}
+            <div className ='map' key={key}>
+              <div className='itemTitle'>{item.checklistitem}</div>
               <div id={item.checklistitemid} onClick={() => this.deleteId(item.checklistitemid)} className="fa-trash-fill deleteButton mt-1 mb-1">Delete</div>
-              <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="mt-1 mb-1 loginButton2">{item.iscomplete.toString()}</button>
+              <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="mt-1 mb-1 loginButton2">Mark Inactive</button>
             </div>
           
         </div>
@@ -94,7 +95,7 @@ export default class NotComplete extends React.Component {
         </div>
       return(
         <div className="listContainer2">
-          <h1>Incomplete Items</h1>
+          <h1>Active Items</h1>
           <div className="bord"> 
             {tert}
           </div>
