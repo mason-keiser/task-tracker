@@ -12,7 +12,9 @@ export default class NotComplete extends React.Component {
     }
 
     componentDidUpdate() {
-      this.notComplete()
+      if (this.state.checklistitems !== null){
+        this.notComplete()
+      }
     }
 
     componentDidMount(){
@@ -21,13 +23,20 @@ export default class NotComplete extends React.Component {
 
     notComplete(){
         const userid = parseInt(this.props.user.userId);
+        if (userid == NaN) {
+          return null;
+        }
         const bool = false;
         fetch('/api/complete/' + userid + '/' + bool, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json'}
         })
         .then(response => {
-           return response.json();
+          if (response.status === 400 || response.status === 404 || response.status === 500) {
+            return null
+          } else {
+            return response.json();
+          }
         })
           .then(result => {
               this.setState({

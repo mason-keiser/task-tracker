@@ -12,7 +12,9 @@ export default class Complete extends React.Component {
     }
 
     componentDidUpdate() {
-      this.complete()
+      if (this.state.checklistitems !== null){
+        this.complete()
+      }
     }
 
     componentDidMount(){
@@ -21,14 +23,17 @@ export default class Complete extends React.Component {
 
     complete(){
         const userid = parseInt(this.props.user.userId);
+        if (userid == NaN){ 
+          return null;
+        }
         const bool = true;
         fetch('/api/complete/' + userid + '/' + bool, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json'}
         })
         .then(response => {
-          if (response.status === 400 || response.status === 404) {
-            null
+          if (response.status === 400 || response.status === 404 || response.status === 500) {
+            return null
           } else {
             return response.json();
           }
