@@ -161,7 +161,7 @@ body {
     width: 30%;
     height: 20%;
     padding-left: 0;
-    margin-left: 20px;
+    
 }
 
 .map {
@@ -321,6 +321,28 @@ a {
 
     .password {
         padding-right: 2rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .map {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        padding: 20px 10px 20px 10px;
+        border: 1px solid black;
+        text-align: center;
+        width: 90vw;
+        max-height: inherit;
+        overflow-x: auto;
+    }
+
+    .deleteButton{
+        padding-left: 0;
     }
 }
 

@@ -62,8 +62,8 @@ export default class Complete extends React.Component {
           this.state.checklistitems.map((item, key) =>
           <div>
             <div className ='map' key={key}>{item.checklistitem}
-              <div className=" fa-trash-fill deleteButton">Delete</div>
-              <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="ml-3 loginButton2">{item.iscomplete.toString()}</button>
+              <div className="mt-1 mb-1 fa-trash-fill deleteButton">Delete</div>
+              <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="mt-1 mb-1 loginButton2">{item.iscomplete.toString()}</button>
             </div>
           </div>
             
