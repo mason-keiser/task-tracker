@@ -132,12 +132,16 @@ app.delete('/api/delete', (req, res ,next) => {
   const sqlQuery = `
           DELETE FROM checklistitems
                 WHERE checklistitemid = $1
+                RETURNING *
         `;
   const params = [checklistitemid];
 
   db.query(sqlQuery, params)
     .then(result => {
-      res.status(202).json({message: 'Checklist item deleted successfully'})
+      res.status(202).json({
+        message: 'Checklist item deleted successfully',
+        checklistitemid: result.rows[0].checklistitemid  
+      })
       return result
     })
     .catch(err => next(err));

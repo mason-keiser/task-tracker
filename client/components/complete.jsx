@@ -8,6 +8,7 @@ export default class Complete extends React.Component {
         }
         this.complete = this.complete.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.deleteId = this.deleteId.bind(this);
     }
 
     componentDidUpdate() {
@@ -54,6 +55,22 @@ export default class Complete extends React.Component {
               console.log(result)
               document.getElementById('bool_update').textContent = result.iscomplete
             })
+        }
+        
+        deleteId(id) {
+          fetch('/api/delete', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              checklistitemid: id
+            })
+          })
+          .then(response => {
+            return response.json();
+          })
+            .then(result => {
+              console.log(result)
+            }) 
         }  
 // Write conditional on render if state is null : not null to render mapped out objects
     render() {
@@ -62,7 +79,7 @@ export default class Complete extends React.Component {
           this.state.checklistitems.map((item, key) =>
           <div>
             <div className ='map' key={key}>{item.checklistitem}
-              <div className="mt-1 mb-1 fa-trash-fill deleteButton">Delete</div>
+              <div onClick={() => this.deleteId(item.checklistitemid)} className="mt-1 mb-1 fa-trash-fill deleteButton">Delete</div>
               <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="mt-1 mb-1 loginButton2">{item.iscomplete.toString()}</button>
             </div>
           </div>
