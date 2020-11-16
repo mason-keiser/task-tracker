@@ -77,7 +77,7 @@ export default class Complete extends React.Component {
         ? 
           this.state.checklistitems.map((item, index) =>
           <div>
-            <div className ='map' key={item.checklistitemid}>
+            <div className ='map' key={index}>
               <div className='itemTitle'>{item.checklistitem}</div>
               <div onClick={() => this.deleteId(item.checklistitemid)} className="mt-1 mb-1 fa-trash-fill deleteButton">Delete</div>
               <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="mt-1 mb-1 loginButton2">Mark Active</button>
