@@ -97,16 +97,6 @@ export default class Header extends React.Component {
                         Inactive
                       </a>
                     </div>
-                <div className="navbar ml-md-5">
-                  <a
-                    href="https://masonkeiser.com/"
-                    offset={offset}
-                    duration={1000}
-                    className="pointer px-0 nav-link"
-                    onClick={this.handleToggle}>
-                    Mason's Portfolio
-                  </a>
-                </div>
               </Nav>
             </Collapse>
             <NavbarBrand className="pointer decoration-none" onClick={() => {
@@ -156,16 +146,7 @@ export default class Header extends React.Component {
                         Inactive
                       </a>
                     </div>
-                    <div className="navbar ml-md-5">
-                      <a
-                        href="https://masonkeiser.com/"
-                        offset={offset}
-                        duration={1000}
-                        className="pointer px-0 nav-link"
-                        onClick={this.handleToggle}>
-                        Mason's Portfolio
-                      </a>
-                    </div>
+                   
                   </Nav>
                 </Collapse>
                 <NavbarBrand className="pointer decoration-none" onClick={() => {
