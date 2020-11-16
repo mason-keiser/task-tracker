@@ -7,6 +7,9 @@ import {
   NavbarBrand,
   Nav
 } from 'reactstrap';
+import {
+  animateScroll as scroll
+} from 'react-scroll';
 
 export default class Header extends React.Component {
   constructor(props) {
@@ -24,13 +27,25 @@ export default class Header extends React.Component {
   }
 
   render() {
+    // header will hide on scroll 
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+      var currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar").style.top = "0";
+      } else {
+        document.getElementById("navbar").style.top = "-100px";
+      }
+    prevScrollpos = currentScrollPos;
+    }
+
     let offset = -86;
     if (window.innerWidth < 768) {
       offset = -286;
     }
     if (!this.props.user.firstname) {
       return (
-        <Container fluid={true} className="py-3 navcont bg-white sticky-top shadow-sm">
+        <Container fluid={true} className="py-3 navcont bg-white sticky-top shadow-sm" id="navbar">
           <Navbar color="faded" light
             expand="md"
             className="row py-0">
@@ -99,16 +114,15 @@ export default class Header extends React.Component {
               if (this.state.isOpen) {
                 this.handleToggle();
               }
-              this.props.setView('home', {});
             }}>
-              Welcome {this.props.user.firstname}
+              Welcome, {this.props.user.firstname}
             </NavbarBrand>
           </Navbar>
         </Container>
       );
     } else {
         return (
-            <Container fluid={true} className="py-3 navcont bg-white sticky-top shadow-sm">
+            <Container fluid={true} className="py-3 navcont bg-white sticky-top shadow-sm" id="navbar">
               <Navbar color="faded" light
                 expand="md"
                 className="row py-0">
@@ -159,9 +173,8 @@ export default class Header extends React.Component {
                   if (this.state.isOpen) {
                     this.handleToggle();
                   }
-                  this.props.setView('home', {});
                 }}>
-                  Welcome {this.props.user.firstname}
+                  Welcome, {this.props.user.firstname}
                 </NavbarBrand>
               </Navbar>
             </Container>

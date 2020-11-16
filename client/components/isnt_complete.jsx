@@ -56,9 +56,6 @@ export default class NotComplete extends React.Component {
         .then(response => {
           return response.json();
         })
-          .then(result => {
-            console.log(result);
-          })
       }  
 
     deleteId(id) {
@@ -72,19 +69,16 @@ export default class NotComplete extends React.Component {
       .then(response => {
         return response.json();
       })
-        .then(result => {
-          console.log(result)
-        }) 
     }
 
     render() {
       const tert = (this.state.checklistitems !== null)
         ? 
-          this.state.checklistitems.map((item, key) =>
+          this.state.checklistitems.map((item, index) =>
           <div>
-            <div className ='map' key={key}>
+            <div className ='map' key={index}>
               <div className='itemTitle'>{item.checklistitem}</div>
-              <div id={item.checklistitemid} onClick={() => this.deleteId(item.checklistitemid)} className="fa-trash-fill deleteButton mt-1 mb-1">Delete</div>
+              <div onClick={() => this.deleteId(item.checklistitemid)} className="fa-trash-fill deleteButton mt-1 mb-1">Delete</div>
               <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="mt-1 mb-1 loginButton2">Mark Inactive</button>
             </div>
           

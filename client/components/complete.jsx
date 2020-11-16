@@ -25,7 +25,7 @@ export default class Complete extends React.Component {
         const userid = parseInt(this.props.user.userId);
         if (userid == NaN){ 
           return null;
-        }
+        } else {
         const bool = true;
         fetch('/api/complete/' + userid + '/' + bool, {
           method: 'GET',
@@ -43,6 +43,7 @@ export default class Complete extends React.Component {
                   checklistitems: result
               })
           })
+        }
       }
 
       handleClick(id) {
@@ -56,9 +57,6 @@ export default class Complete extends React.Component {
           .then(response => {
             return response.json()
           })
-            .then(result => {
-              console.log(result)
-            })
         }
         
         deleteId(id) {
@@ -72,17 +70,14 @@ export default class Complete extends React.Component {
           .then(response => {
             return response.json();
           })
-            .then(result => {
-              console.log(result)
-            }) 
         }  
-// Write conditional on render if state is null : not null to render mapped out objects
+
     render() {
       const tert = (this.state.checklistitems !== null)
         ? 
-          this.state.checklistitems.map((item, key) =>
+          this.state.checklistitems.map((item, index) =>
           <div>
-            <div className ='map' key={key}>
+            <div className ='map' key={item.checklistitemid}>
               <div className='itemTitle'>{item.checklistitem}</div>
               <div onClick={() => this.deleteId(item.checklistitemid)} className="mt-1 mb-1 fa-trash-fill deleteButton">Delete</div>
               <button id='bool_update' onClick={() => this.handleClick(item.checklistitemid)} className="mt-1 mb-1 loginButton2">Mark Active</button>

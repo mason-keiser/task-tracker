@@ -27,7 +27,7 @@ export default class Mainpage extends React.Component {
 
     render() {
         return (
-            <div className="homepageContainer">
+            <div className="homepageContainer2">
                 <div className="homeTitle">
                     <h1>Add New Checklist Item</h1>
                 </div>
