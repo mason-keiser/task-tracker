@@ -16,7 +16,14 @@ export default class Mainpage extends React.Component {
           userid: Number(this.props.user.userId),
           checklistitem: this.state.checklistitem
         };
-        callback(obj)
+    if (obj.checklistitem === '') {
+        document.getElementById('checklistitem').style.borderColor = 'red'
+        const req = document.getElementById('checklistitem')
+          req.placeholder = 'enter checklist item to submit'
+          req.style.color = 'red'
+      } else {
+      callback(obj);
+      }
     }
     
     handleChange(event) {
