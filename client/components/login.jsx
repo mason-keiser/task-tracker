@@ -18,7 +18,19 @@ export default class Login extends React.Component {
       user_email: this.state.user_email.toLowerCase(),
       user_password: this.state.user_password
     };
-    callback(obj)
+    if (obj.user_email === '') {
+      document.getElementById('user_email').style.borderColor = 'red'
+      const req = document.getElementById('required')
+        req.textContent = '* red fields are required for checkout'
+        req.style.color = 'red'
+    } if (obj.user_password === '') {
+      document.getElementById('user_password').style.borderColor = 'red'
+      const req = document.getElementById('required')
+        req.textContent = '* red fields are required for checkout'
+        req.style.color = 'red'
+    } else {
+    callback(obj);
+    }
   }
 
   handleChange(event) {
@@ -37,6 +49,7 @@ export default class Login extends React.Component {
             <div className='greeting '>
               <h2>Welcome Back</h2>
             </div>
+            <div style={{textAlign: 'center'}} id="required"></div>
             <form className="login-group mt-5" onSubmit={() => this.handleSubmit(this.props.login)}>
               <div className='form-group'>
                 <label htmlFor="email" className='pr-2'>Email: </label>

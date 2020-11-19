@@ -22,7 +22,29 @@ export default class SignUp extends React.Component {
       email: this.state.user_email.toLowerCase(),
       password: this.state.user_password
     };
-    callback(obj)
+    if (obj.firstname === '') {
+      document.getElementById('user_first').style.borderColor = 'red'
+      const req = document.getElementById('required')
+        req.textContent = '* red fields are required for checkout'
+        req.style.color = 'red'
+    } if (obj.lastname === '') {
+      document.getElementById('user_last').style.borderColor = 'red'
+      const req = document.getElementById('required')
+        req.textContent = '* red fields are required for checkout'
+        req.style.color = 'red'
+    } if (obj.email === '') {
+      document.getElementById('user_email').style.borderColor = 'red'
+      const req = document.getElementById('required')
+        req.textContent = '* red fields are required for checkout'
+        req.style.color = 'red'
+    } if (obj.password === '') {
+      document.getElementById('user_password').style.borderColor = 'red'
+      const req = document.getElementById('required')
+        req.textContent = '* red fields are required for checkout'
+        req.style.color = 'red'
+    } else {
+    callback(obj);
+    }
   }
 
   handleChange(event) {
@@ -47,6 +69,7 @@ export default class SignUp extends React.Component {
             <div className='greeting'>
               <h2>Welcome</h2>
             </div>
+            <div style={{textAlign: 'center'}} id="required"></div>
             <form className="login-group mt-5" onSubmit={() => this.handleSubmit(this.props.signUp)}>
               <div className='form-group'>
                 <label htmlFor="username" className='pr-3'>First: </label>
