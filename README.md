@@ -1,5 +1,5 @@
 # task-tracker
-A full stack CRUD application to keep track and organize daily tasks
+A full stack CRUD application to keep track and organize daily tasks.
 
 * Link: https://planner.masonkeiser.com/
 # Technologies Used
